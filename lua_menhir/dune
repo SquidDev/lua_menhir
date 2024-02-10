@@ -1,0 +1,18 @@
+(executable
+ (name lua_menhir)
+ (public_name lua_menhir)
+ (modules lua_menhir parser_template)
+ (libraries cmdliner menhirSdk))
+
+(executable
+ (name make_template)
+ (modules make_template)
+ (libraries re))
+
+(rule
+ (action
+  (with-stdout-to
+   parser_template.ml
+   (with-stdin-from
+    parser_template.lua
+    (run %{exe:make_template.exe})))))

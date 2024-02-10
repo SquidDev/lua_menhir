@@ -1,0 +1,105 @@
+{
+local function is_same_line(context, previous, token, token_start)
+    local prev_line = context.get_pos(previous)
+    local tok_line = context.get_pos(token_start)
+    return prev_line == tok_line and token ~= tokens.EOF
+end
+}
+
+rule error_message = parse error
+
+(* Match `expr() =` in tables: probably wanted `[expr()] = ...` *)
+| [_ / table_entry: expr . ...] @ EQUALS
+  { return errors.table_key_equals($startloc(token), $endloc(token)) }
+
+(* Match `expr() = ` in any other context: probably wanted `expr() == `. *)
+| [expr] @ EQUALS
+  { return errors.use_double_equals($startloc(token), $endloc(token)) }
+
+(* Suggest a missing comma in table entries. *)
+| last = [_ / table_body: table_entry . ...] @ STRING, NUMBER, TRUE, FALSE, NIL, OSQUARE, OPAREN, IDENT
+  { return errors.missing_table_comma(token, $startloc(token), $endloc(token), $endloc(last)) }
+
+(* Suggest removing a comma in function calls. *)
+| (_ / call_args: OPAREN . ...);
+  (sep_list1(COMMA,expr) | expr | COMMA)* ;
+  (comma = COMMA / sep_list1(COMMA,expr): sep_list1(COMMA,expr) COMMA . expr ...)
+  @ CPAREN
+  { return errors.trailing_call_comma($startloc(comma), $endloc(comma), $startloc(token), $endloc(token)) }
+
+(* Unclosed parentheses. *)
+| open_ = OPAREN; [_ / ... . CPAREN ...]
+| open_ = OBRACE; [_ / ... . CBRACE ...]
+| open_ = OSQUARE; [_ / ... . CSQUARE ...]
+  { return errors.unclosed_brackets($startloc(open_), $endloc(open_), token, $startloc(token), $endloc(token)) }
+
+| start = DOUBLE_COLON; [_ / stmt: DOUBLE_COLON ident . DOUBLE_COLON]
+  { return errors.unclosed_label($startloc(start), $endloc(start), token, $startloc(token), $endloc(token)) }
+
+(* `local function x.f() end` *)
+| local_ = LOCAL; FUNCTION; [var] @ DOT
+  { return errors.local_function_dot($startloc(local_), $endloc(local_), $startloc(token), $endloc(token)) }
+
+(* An `if`/`elseif` statement with a missing `then`. *)
+| (if_ = IF | if_ = ELSEIF); expr = [expr]
+  {
+    local start
+    if is_same_line(context, $endloc(expr), token, $startloc(token)) then
+        start = $startloc(token)
+    else
+        start = $endloc(expr) + 1
+    end
+    return errors.expected_then($startloc(if_), $endloc(if_), start)
+  }
+
+(* Statements with a missing `end`. *)
+| (start = IF | start = ELSEIF) ; expr ; THEN; [stmts]
+| start = ELSE ; [stmts]
+| start = WHILE ; expr ; DO; [stmts]
+| (start = DO / stmt: DO . ...) ; [stmts]
+| (start = FOR / stmt: FOR . ...) ; sep_list1(COMMA,var) ; IN ; sep_list1(COMMA,expr) ; DO ; [stmts]
+| (start = FOR / stmt: FOR . ...) ; var ; EQUALS ; expr ; COMMA ; expr ; (COMMA ; expr)? ; DO ; [stmts]
+| (start = FUNCTION / stmt: FUNCTION . ...) ; function_name; [args ; stmts]
+| (start = FUNCTION / atom: FUNCTION . ...) ; [args ; stmts]
+  { return errors.expected_end($startloc(start), $endloc(start), token, $startloc(token), $endloc(token)) }
+
+(* We handle local function specially, to capture both loc and func. *)
+| loc = LOCAL; func = FUNCTION; var; [args ; stmts]
+{ return errors.expected_end($startloc(loc), $endloc(func), token, $startloc(token), $endloc(token)) }
+
+(* A standalone name in a statement context *)
+| (/ stmt: . call) ; x = [simple_expr]
+  partial {
+    if not is_same_line(context, $endloc(x), token, $startloc(token)) then
+        return errors.standalone_name_call(token, $endloc(x))
+    end
+  }
+
+| (/ stmt: . sep_list1(COMMA,name) ...) ; [name]
+  { return errors.standalone_name(token, $startloc(token)) }
+
+| (/ stmt: . sep_list1(COMMA,name) ...) ; [sep_list1(COMMA,name)]
+  { return errors.standalone_names(token, $startloc(token)) }
+
+(* Fallback parse error for when we expected a statement. *)
+| [_ / stmts: ... . ...]
+  partial {
+    if token == tokens.END then
+        return errors.unexpected_end($startloc(token), $endloc(token))
+    elseif token ~= tokens.EOF then
+        return errors.expected_statement(token, $startloc(token), $endloc(token))
+    end
+  }
+
+(* Fallback parse error for function arguments. *)
+| [_? / ... . args ...]
+  { return errors.expected_function_args(token, $startloc(token), $endloc(token)) }
+
+(* Fallback parse error for when we expected an expression. *)
+| [/ ... . expr ...] | [/ ... . expr_pow ...] | [/ ... . sep_list1(COMMA,expr) ...]
+  { return errors.expected_expression(token, $startloc(token), $endloc(token)) }
+
+(* Fallback parse error for when we expected a variable name. *)
+| [/ ... . var ...] | [/ ... . name ...] | [_ / ... . function_name ...]
+  { return errors.expected_var(token, $startloc(token), $endloc(token)) }
+

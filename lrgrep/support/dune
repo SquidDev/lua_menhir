@@ -2,6 +2,7 @@
   (name support)
   (wrapped false)
   (modules lrgrep_support)
+  (public_name lrgrep.support)
   (libraries utils runtime))
 
 (library

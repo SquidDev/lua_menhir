@@ -3,4 +3,5 @@
 
 (library
  (name front)
+ (public_name lrgrep.front)
  (libraries utils cmon))

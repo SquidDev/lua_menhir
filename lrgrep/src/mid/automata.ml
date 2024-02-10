@@ -43,25 +43,16 @@ end = struct
   let create ~filename ?(line=1) output =
     {filename; line; output; reloc = false; last_is_nl = true}
 
-  let print_loc_dir t filename line =
-    output t (Printf.sprintf "# %d %S\n" (line + 1) filename)
-
-  let print_loc t (loc : Syntax.location) =
-    print_loc_dir t loc.loc_file loc.start_line;
-    output t (String.make loc.start_col ' ')
-
   let print ?loc t msg =
     match loc with
     | None ->
       if t.reloc then (
         if not t.last_is_nl then output t "\n";
-        print_loc_dir t t.filename t.line;
         t.reloc <- false;
       );
       output t msg
     | Some loc ->
       if not t.last_is_nl then output t "\n";
-      print_loc t loc;
       t.reloc <- true;
       output t msg
 
@@ -1457,7 +1448,7 @@ struct
     done;
     Bytes.to_string b
 
-  let bind_capture out ~roffset index (def, name) =
+  let bind_capture out ~indent ~roffset index (def, name) =
     let is_optional = IndexSet.mem index RunDFA.partial_captures in
     let none = if is_optional then "None" else "assert false" in
     let some x = if is_optional then "Some (" ^ x ^ ")" else x in
@@ -1465,69 +1456,24 @@ struct
     incr roffset;
     match def with
     | Value ->
-      let typ = recover_type index in
-      Printer.fmt out
-        "    let %s, _startloc_%s_, _endloc_%s_ = match __registers.(%d) with \n\
-        \      | Empty -> %s\n\
-        \      | Initial -> assert false\n\
-        \      | Value (%s.MenhirInterpreter.Element (%s, %s, startp, endp)%s) ->\n"
-        name name name offset
-        (if is_optional then "(None, None, None)" else "assert false")
-        E.parser_name
-        (if Option.is_none typ then "_" else "st")
-        (if Option.is_none typ then "_" else "x")
-        (if Option.is_none typ then "as x" else "");
-      begin match typ with
-        | None -> ()
-        | Some (symbols, typ) ->
-          Printer.fmt out
-            "        let x = match %s.MenhirInterpreter.incoming_symbol st with\n"
-            E.parser_name;
-            List.iter (fun symbol ->
-              Printer.fmt out "          | %s -> (x : %s)\n"
-              (symbol_matcher symbol) typ) (IndexSet.elements symbols);
-            Printer.fmt out
-            "          | _ -> assert false\n\
-            \        in\n"
-      end;
-      Printer.fmt out "        (%s, %s, %s)\n" (some "x") (some "startp") (some "endp");
-      Printer.fmt out "    in\n";
-      Printer.fmt out "    let _ = %s in\n" name
+      Printer.fmt out "%slocal %s = stack[regs[%d]]\n" indent name offset;
+      Printer.fmt out "%slocal _startloc_%s_ = stack[regs[%d] + 1]\n" indent name offset;
+      Printer.fmt out "%slocal _endloc_%s_ = stack[regs[%d] + 2]\n" indent name offset
     | Start_loc ->
-      Printer.fmt out
-        "    let _startloc_%s_ = match __registers.(%d) with\n\
-        \      | Empty -> %s\n\
-        \      | Initial -> %s\n\
-        \      | Value (%s.MenhirInterpreter.Element (_, _, p, _)) -> %s\n\
-        \    in\n"
-        name offset
-        none
-        (some "__initialpos")
-        E.parser_name (some "p")
+      (* TODO: Do we need to handle empty lists here? *)
+      Printer.fmt out "%slocal _startloc_%s_ = stack[regs[%d] + 1]\n" indent name offset
     | End_loc ->
-      Printer.fmt out
-        "    let _endloc_%s_ = match __registers.(%d) with\n\
-        \      | Empty -> %s\n\
-        \      | Initial -> %s\n\
-        \      | Value (%s.MenhirInterpreter.Element (_, _, _, p)) -> %s\n\
-        \    in\n"
-        name offset
-        none
-        (some "__initialpos")
-        E.parser_name (some "p")
+      Printer.fmt out "%slocal _endloc_%s_ = stack[regs[%d] + 2]\n" indent name offset
 
   let lookahead_constraint pattern =
     match pattern.Syntax.lookaheads with
-    | [] -> None
     | symbols ->
       let lookahead_msg =
         "Lookahead can either be a terminal or `first(nonterminal)'"
       in
       let term_pattern t =
         let name = Info.Terminal.to_string t in
-        match Info.Terminal.semantic_value t with
-        | None -> name
-        | Some _ -> name ^ " _"
+        Printf.sprintf "token == tokens.%s" name
       in
       let sym_pattern (sym, pos) =
         match sym with
@@ -1553,53 +1499,32 @@ struct
         | _ ->
           failwith lookahead_msg
       in
-      Some (string_concat_map ~wrap:("(",")") "|" Fun.id @@
-            List.concat_map sym_pattern symbols)
+      string_concat_map " or " Fun.id @@ List.concat_map sym_pattern symbols
 
   let output_code out =
-    Printer.fmt out
-      "let execute_%s %s\n
-      \  (__clause, (__registers : %s.MenhirInterpreter.element Lrgrep_runtime.register_values))\n\
-      \  (__initialpos : Lexing.position)\n\
-      \  ((token : %s.MenhirInterpreter.token), _startloc_token_, _endloc_token_)\n\
-      \  : _ option = match __clause, token with\n"
-      E.entry.name (String.concat " " E.entry.args)
-      E.parser_name E.parser_name;
+    Printer.fmt out "local %s = {\n" E.entry.name;
     let output_action (source, clauses) (captures, _states) =
-      Printer.fmt out " ";
-      IndexSet.iter (fun index ->
-          let clause = Vector.get Clause.vector index in
-          Printer.fmt out
-            " | %d, %s"
-            (Index.to_int index)
-            (Option.value (lookahead_constraint clause.pattern)
-               ~default:"_");
-        ) clauses;
-      Printer.fmt out " ->\n";
-      IndexMap.iter (bind_capture out ~roffset:(ref 0)) captures;
+      Printer.fmt out "    function(context, stack, stack_n, regs, token, _startloc_token_, _endloc_token_)\n";
+      if not (IndexSet.is_singleton clauses) then failwith "Expected a singleton clause";
+      let clause = IndexSet.elements clauses |> List.hd |> Clause.get in
+      let is_constrained = clause.pattern.lookaheads <> [] in
+      if is_constrained then Printer.fmt out "        if %s then\n" (lookahead_constraint clause.pattern);
+
+      let indent = if is_constrained then String.make 12 ' ' else String.make 8 ' ' in
+      IndexMap.iter (bind_capture out ~indent ~roffset:(ref 1)) captures;
       begin match source.Syntax.action with
         | Unreachable ->
-          Printer.print out "    failwith \"Should be unreachable\"\n"
-        | Partial (loc, str) ->
-          Printer.print out "    (\n";
-          Printer.fmt out ~loc "%s\n" (rewrite_loc_keywords str);
-          Printer.print out "    )\n"
-        | Total (loc, str) ->
-          Printer.print out "    Some (\n";
-          Printer.fmt out ~loc "%s\n" (rewrite_loc_keywords str);
-          Printer.print out "    )\n"
+          Printer.fmt out "%serror(\"Should be unreachable\")\n" indent
+        | Partial (loc, str) | Total (loc, str) ->
+          Printer.fmt out ~loc "%s-- %s, line %d\n" indent loc.loc_file loc.start_line;
+          Printer.fmt out ~loc "%s%s\n" indent (String.trim str |> rewrite_loc_keywords);
       end;
-      let constrained =
-        IndexSet.filter
-          (fun clause -> (Clause.get clause).pattern.lookaheads <> [])
-          clauses
-      in
-      if not (IndexSet.is_empty constrained) then
-        Printer.fmt out "  | (%s), _ -> None\n"
-          (string_concat_map "|" string_of_index (IndexSet.elements constrained))
+
+      if is_constrained then Printer.fmt out "        end\n";
+      Printer.fmt out "    end,\n"
     in
     Vector.iter2 output_action Clause.actions LazyNFA.actions;
-    Printer.print out "  | _ -> failwith \"Invalid action (internal error or API misuse)\"\n\n"
+    Printer.fmt out "}\n"
 
   let () = Stopwatch.leave time
 end

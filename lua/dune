@@ -1,0 +1,75 @@
+(include_subdirs unqualified)
+
+(rule
+ (alias gen-parser)
+ (action
+  (diff cc/internal/syntax/parser.lua ../parser/parser.lua)))
+
+; Run ./test/check-markdown.lua against lexer_spec
+
+(alias
+ (name test_deps)
+ (deps
+  (source_tree cc)
+  syntax_helpers.lua
+  cc/expect.lua
+  cc/pretty.lua))
+
+(rule
+ (deps
+  (alias test_deps))
+ (action
+  (with-stdout-to
+   lexer_spec.new.md
+   (run %{dep:./test/check-markdown.lua} -T %{dep:./test/lexer_spec.md}))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff test/lexer_spec.md lexer_spec.new.md)))
+
+; Run ./test/check-markdown.lua against parser_spec
+
+(rule
+ (deps
+  (alias test_deps))
+ (action
+  (with-stdout-to
+   parser_spec.new.md
+   (run %{dep:./test/check-markdown.lua} %{dep:./test/parser_spec.md}))))
+
+(rule
+ (alias parser_spec)
+ (action
+  (diff test/parser_spec.md parser_spec.new.md)))
+
+(alias
+ (name runtest)
+ (deps
+  (alias parser_spec)))
+
+; Generate our parser_exhaustive_spec from Menhir's error messages file, and then
+; run ./test/check-markdown.lua against it.
+
+(rule
+ (action
+  (with-stdout-to
+   parser_exhaustive_spec.gen.md
+   (with-stdin-from
+    ../parser/messages.txt
+    (run %{dep:./test/make-messages.lua})))))
+
+(rule
+ (deps
+  (alias test_deps))
+ (action
+  (with-stdout-to
+   parser_exhaustive_spec.new.md
+   (run
+    %{dep:./test/check-markdown.lua}
+    %{dep:parser_exhaustive_spec.gen.md}))))
+
+(rule
+ (alias runtest)
+ (action
+  (diff test/parser_exhaustive_spec.md parser_exhaustive_spec.new.md)))

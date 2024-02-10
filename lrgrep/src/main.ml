@@ -318,16 +318,54 @@ let process_entry oc (entry : Front.Syntax.entry) = (
   (Label.register_count, Index.to_int OutDFA.initial, program)
 )
 
+let output_quoted_string oc s =
+    let length = String.length s in
+
+    let is_digit x = x >= '0' && x <= '9' in
+    let output_escape i c =
+      if i < length - 1 && is_digit s.[i + 1] then
+        Printf.fprintf oc "\\%03d" (Char.code c)
+      else
+        Printf.fprintf oc "\\%d" (Char.code c)
+    in
+
+    output_char oc '"';
+    let rec go i =
+      if i >= length then () else
+      let c = s.[i] in
+      match c with
+      | '\000' -> go_zero 0 i
+      | '"' -> output_string oc "\\\""; go (i + 1)
+      | '\\' -> output_string oc "\\\\"; go (i + 1)
+      | '\n' -> output_string oc "\\n"; go (i + 1)
+      | '\r' -> output_string oc "\\r"; go (i + 1)
+      | '\t' -> output_string oc "\\t"; go (i + 1)
+      | ' ' .. '~' -> output_char oc c; go (i + 1)
+      | _ -> output_escape i c; go (i + 1)
+    and go_zero n i =
+      (* Perform run length encoding of \0 when optimal *)
+      if i < length && s.[i] = '\000' then
+        go_zero (n + 1) (i + 1)
+      else if n <= 12 then (
+        for i = 0 to n - 2 do output_string oc "\\0" done;
+        output_escape (i - 1) '\000';
+        go i
+      ) else (
+        Printf.fprintf oc {|" .. ("\0"):rep(%d) .. "|} n;
+        go i
+      )
+    in
+    go 0;
+    output_char oc '"'
+
 
 let output_table oc entry (registers, initial, (program, table, remap)) =
   let print fmt = Printf.fprintf oc fmt in
-  print "module Table_%s : Lrgrep_runtime.Parse_errors = struct\n"
-    entry.Front.Syntax.name;
-  print "  let registers = %d\n" registers;
-  print "  let initial = %d\n" remap.(initial);
-  print "  let table = %S\n" table;
-  print "  let program = %S\n" program;
-  print "end\n"
+  (* local error_program_start, error_program  *)
+  let name = entry.Front.Syntax.name in
+  print "local %s_program_start, %s_program = %d, %a\n"
+    name name remap.(initial) output_quoted_string program;
+  print "local %s_table = %a\n" name output_quoted_string table
 
 let () = (
   (*if !verbose then (

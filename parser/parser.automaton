@@ -1,0 +1,3517 @@
+State 0:
+## Known stack suffix:
+##
+## LR(1) items:
+program' -> . program [ # ]
+## Transitions:
+-- On stmts shift to state 1
+-- On rlist(__anonymous_0) shift to state 3
+-- On program shift to state 187
+## Reductions:
+-- On WHILE RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF DO BREAK
+--   reduce production rlist(__anonymous_0) ->
+
+State 1:
+## Known stack suffix:
+## stmts
+## LR(1) items:
+program -> stmts . EOF [ # ]
+## Transitions:
+-- On EOF shift to state 2
+## Reductions:
+
+State 2:
+## Known stack suffix:
+## stmts EOF
+## LR(1) items:
+program -> stmts EOF . [ # ]
+## Transitions:
+## Reductions:
+-- On #
+--   reduce production program -> stmts EOF
+
+State 3:
+## Known stack suffix:
+## rlist(__anonymous_0)
+## LR(1) items:
+rlist(__anonymous_0) -> rlist(__anonymous_0) . stmt [ WHILE UNTIL RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+rlist(__anonymous_0) -> rlist(__anonymous_0) . stmt SEMICOLON [ WHILE UNTIL RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+stmts -> rlist(__anonymous_0) . last_stat [ UNTIL EOF END ELSEIF ELSE ]
+## Transitions:
+-- On WHILE shift to state 4
+-- On RETURN shift to state 110
+-- On REPEAT shift to state 113
+-- On OPAREN shift to state 8
+-- On LOCAL shift to state 117
+-- On IF shift to state 130
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 143
+-- On FOR shift to state 153
+-- On DO shift to state 171
+-- On BREAK shift to state 174
+-- On var shift to state 31
+-- On stmt shift to state 176
+-- On simple_expr shift to state 178
+-- On sep_list1(COMMA,name) shift to state 179
+-- On name shift to state 184
+-- On last_stat shift to state 185
+-- On call shift to state 186
+## Reductions:
+-- On UNTIL EOF END ELSEIF ELSE
+--   reduce production last_stat ->
+
+State 4:
+## Known stack suffix:
+## WHILE
+## LR(1) items:
+stmt -> WHILE . expr DO stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 106
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 5:
+## Known stack suffix:
+## TRUE
+## LR(1) items:
+atom -> TRUE . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production atom -> TRUE
+
+State 6:
+## Known stack suffix:
+## SUB
+## LR(1) items:
+expr_pow -> SUB . expr_pow [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 105
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 7:
+## Known stack suffix:
+## STRING
+## LR(1) items:
+atom -> STRING . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production atom -> STRING
+
+State 8:
+## Known stack suffix:
+## OPAREN
+## LR(1) items:
+simple_expr -> OPAREN . expr CPAREN [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 103
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 9:
+## Known stack suffix:
+## OBRACE
+## LR(1) items:
+table -> OBRACE . table_body CBRACE [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OSQUARE shift to state 10
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 92
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table_entry shift to state 95
+-- On table_body shift to state 101
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 100
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+-- On CBRACE
+--   reduce production table_body ->
+
+State 10:
+## Known stack suffix:
+## OSQUARE
+## LR(1) items:
+table_entry -> OSQUARE . expr CSQUARE EQUALS expr [ SEMICOLON COMMA CBRACE ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 88
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 11:
+## Known stack suffix:
+## NUMBER
+## LR(1) items:
+atom -> NUMBER . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production atom -> NUMBER
+
+State 12:
+## Known stack suffix:
+## NOT
+## LR(1) items:
+expr_pow -> NOT . expr_pow [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 87
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 13:
+## Known stack suffix:
+## NIL
+## LR(1) items:
+atom -> NIL . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production atom -> NIL
+
+State 14:
+## Known stack suffix:
+## LEN
+## LR(1) items:
+expr_pow -> LEN . expr_pow [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 86
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 15:
+## Known stack suffix:
+## IDENT
+## LR(1) items:
+var -> IDENT . [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IN IF IDENT GT GE FUNCTION FOR EQUALS EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IN IF IDENT GT GE FUNCTION FOR EQUALS EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD
+--   reduce production var -> IDENT
+
+State 16:
+## Known stack suffix:
+## FUNCTION
+## LR(1) items:
+atom -> FUNCTION . args stmts END [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On OPAREN shift to state 17
+-- On args shift to state 26
+## Reductions:
+
+State 17:
+## Known stack suffix:
+## OPAREN
+## LR(1) items:
+args -> OPAREN . sep_list0(COMMA,arg) CPAREN [ WHILE RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR END DO BREAK ]
+## Transitions:
+-- On IDENT shift to state 15
+-- On DOTS shift to state 18
+-- On var shift to state 19
+-- On sep_list1(COMMA,arg) shift to state 20
+-- On sep_list0(COMMA,arg) shift to state 23
+-- On arg shift to state 25
+## Reductions:
+-- On CPAREN
+--   reduce production sep_list0(COMMA,arg) ->
+
+State 18:
+## Known stack suffix:
+## DOTS
+## LR(1) items:
+arg -> DOTS . [ CPAREN COMMA ]
+## Transitions:
+## Reductions:
+-- On CPAREN COMMA
+--   reduce production arg -> DOTS
+
+State 19:
+## Known stack suffix:
+## var
+## LR(1) items:
+arg -> var . [ CPAREN COMMA ]
+## Transitions:
+## Reductions:
+-- On CPAREN COMMA
+--   reduce production arg -> var
+
+State 20:
+## Known stack suffix:
+## sep_list1(COMMA,arg)
+## LR(1) items:
+sep_list0(COMMA,arg) -> sep_list1(COMMA,arg) . [ CPAREN ]
+sep_list1(COMMA,arg) -> sep_list1(COMMA,arg) . COMMA arg [ CPAREN COMMA ]
+## Transitions:
+-- On COMMA shift to state 21
+## Reductions:
+-- On CPAREN
+--   reduce production sep_list0(COMMA,arg) -> sep_list1(COMMA,arg)
+
+State 21:
+## Known stack suffix:
+## sep_list1(COMMA,arg) COMMA
+## LR(1) items:
+sep_list1(COMMA,arg) -> sep_list1(COMMA,arg) COMMA . arg [ CPAREN COMMA ]
+## Transitions:
+-- On IDENT shift to state 15
+-- On DOTS shift to state 18
+-- On var shift to state 19
+-- On arg shift to state 22
+## Reductions:
+
+State 22:
+## Known stack suffix:
+## sep_list1(COMMA,arg) COMMA arg
+## LR(1) items:
+sep_list1(COMMA,arg) -> sep_list1(COMMA,arg) COMMA arg . [ CPAREN COMMA ]
+## Transitions:
+## Reductions:
+-- On CPAREN COMMA
+--   reduce production sep_list1(COMMA,arg) -> sep_list1(COMMA,arg) COMMA arg
+
+State 23:
+## Known stack suffix:
+## OPAREN sep_list0(COMMA,arg)
+## LR(1) items:
+args -> OPAREN sep_list0(COMMA,arg) . CPAREN [ WHILE RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR END DO BREAK ]
+## Transitions:
+-- On CPAREN shift to state 24
+## Reductions:
+
+State 24:
+## Known stack suffix:
+## OPAREN sep_list0(COMMA,arg) CPAREN
+## LR(1) items:
+args -> OPAREN sep_list0(COMMA,arg) CPAREN . [ WHILE RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR END DO BREAK ]
+## Transitions:
+## Reductions:
+-- On WHILE RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR END DO BREAK
+--   reduce production args -> OPAREN sep_list0(COMMA,arg) CPAREN
+
+State 25:
+## Known stack suffix:
+## arg
+## LR(1) items:
+sep_list1(COMMA,arg) -> arg . [ CPAREN COMMA ]
+## Transitions:
+## Reductions:
+-- On CPAREN COMMA
+--   reduce production sep_list1(COMMA,arg) -> arg
+
+State 26:
+## Known stack suffix:
+## FUNCTION args
+## LR(1) items:
+atom -> FUNCTION args . stmts END [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On stmts shift to state 27
+-- On rlist(__anonymous_0) shift to state 3
+## Reductions:
+-- On WHILE RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR END DO BREAK
+--   reduce production rlist(__anonymous_0) ->
+
+State 27:
+## Known stack suffix:
+## FUNCTION args stmts
+## LR(1) items:
+atom -> FUNCTION args stmts . END [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On END shift to state 28
+## Reductions:
+
+State 28:
+## Known stack suffix:
+## FUNCTION args stmts END
+## LR(1) items:
+atom -> FUNCTION args stmts END . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production atom -> FUNCTION args stmts END
+
+State 29:
+## Known stack suffix:
+## FALSE
+## LR(1) items:
+atom -> FALSE . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production atom -> FALSE
+
+State 30:
+## Known stack suffix:
+## DOTS
+## LR(1) items:
+atom -> DOTS . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production atom -> DOTS
+
+State 31:
+## Known stack suffix:
+## var
+## LR(1) items:
+name -> var . [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQUALS EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQUALS EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD
+--   reduce production name -> var
+
+State 32:
+## Known stack suffix:
+## table
+## LR(1) items:
+atom -> table . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production atom -> table
+
+State 33:
+## Known stack suffix:
+## simple_expr
+## LR(1) items:
+atom -> simple_expr . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+call -> simple_expr . call_args [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+call -> simple_expr . COLON IDENT call_args [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+name -> simple_expr . DOT IDENT [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+name -> simple_expr . OSQUARE expr CSQUARE [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+-- On STRING shift to state 34
+-- On OSQUARE shift to state 35
+-- On OPAREN shift to state 72
+-- On OBRACE shift to state 9
+-- On DOT shift to state 79
+-- On COLON shift to state 81
+-- On table shift to state 83
+-- On call_args shift to state 85
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production atom -> simple_expr
+** Conflict on OPAREN
+
+State 34:
+## Known stack suffix:
+## STRING
+## LR(1) items:
+call_args -> STRING . [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD
+--   reduce production call_args -> STRING
+
+State 35:
+## Known stack suffix:
+## simple_expr OSQUARE
+## LR(1) items:
+name -> simple_expr OSQUARE . expr CSQUARE [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQUALS EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 42
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 36:
+## Known stack suffix:
+## name
+## LR(1) items:
+simple_expr -> name . [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD
+--   reduce production simple_expr -> name
+
+State 37:
+## Known stack suffix:
+## expr_pow
+## LR(1) items:
+expr -> expr_pow . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr_pow -> expr_pow . POW expr_pow [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On POW shift to state 38
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production expr -> expr_pow
+
+State 38:
+## Known stack suffix:
+## expr_pow POW
+## LR(1) items:
+expr_pow -> expr_pow POW . expr_pow [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 39
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 39:
+## Known stack suffix:
+## expr_pow POW expr_pow
+## LR(1) items:
+expr_pow -> expr_pow . POW expr_pow [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr_pow -> expr_pow POW expr_pow . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On POW shift to state 38
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production expr_pow -> expr_pow POW expr_pow
+
+State 40:
+## Known stack suffix:
+## call
+## LR(1) items:
+simple_expr -> call . [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD
+--   reduce production simple_expr -> call
+
+State 41:
+## Known stack suffix:
+## atom
+## LR(1) items:
+expr_pow -> atom . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production expr_pow -> atom
+
+State 42:
+## Known stack suffix:
+## simple_expr OSQUARE expr
+## LR(1) items:
+expr -> expr . AND expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . OR expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . ADD expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . SUB expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . MUL expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . DIV expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . MOD expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . CONCAT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . EQ expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . NE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . LT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . LE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . GT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . GE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+name -> simple_expr OSQUARE expr . CSQUARE [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQUALS EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+-- On SUB shift to state 43
+-- On OR shift to state 51
+-- On NE shift to state 53
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQ shift to state 67
+-- On DIV shift to state 49
+-- On CSQUARE shift to state 71
+-- On CONCAT shift to state 55
+-- On AND shift to state 69
+-- On ADD shift to state 57
+## Reductions:
+
+State 43:
+## Known stack suffix:
+## expr SUB
+## LR(1) items:
+expr -> expr SUB . expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 44
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 44:
+## Known stack suffix:
+## expr SUB expr
+## LR(1) items:
+expr -> expr . AND expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . OR expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . ADD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . SUB expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr SUB expr . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MUL expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . DIV expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MOD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . CONCAT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . EQ expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . NE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On DIV shift to state 49
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production expr -> expr SUB expr
+
+State 45:
+## Known stack suffix:
+## expr MUL
+## LR(1) items:
+expr -> expr MUL . expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 46
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 46:
+## Known stack suffix:
+## expr MUL expr
+## LR(1) items:
+expr -> expr . AND expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . OR expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . ADD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . SUB expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MUL expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr MUL expr . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . DIV expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MOD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . CONCAT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . EQ expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . NE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production expr -> expr MUL expr
+
+State 47:
+## Known stack suffix:
+## expr MOD
+## LR(1) items:
+expr -> expr MOD . expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 48
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 48:
+## Known stack suffix:
+## expr MOD expr
+## LR(1) items:
+expr -> expr . AND expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . OR expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . ADD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . SUB expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MUL expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . DIV expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MOD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr MOD expr . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . CONCAT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . EQ expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . NE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production expr -> expr MOD expr
+
+State 49:
+## Known stack suffix:
+## expr DIV
+## LR(1) items:
+expr -> expr DIV . expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 50
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 50:
+## Known stack suffix:
+## expr DIV expr
+## LR(1) items:
+expr -> expr . AND expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . OR expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . ADD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . SUB expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MUL expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . DIV expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr DIV expr . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MOD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . CONCAT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . EQ expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . NE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production expr -> expr DIV expr
+
+State 51:
+## Known stack suffix:
+## expr OR
+## LR(1) items:
+expr -> expr OR . expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 52
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 52:
+## Known stack suffix:
+## expr OR expr
+## LR(1) items:
+expr -> expr . AND expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . OR expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr OR expr . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . ADD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . SUB expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MUL expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . DIV expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MOD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . CONCAT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . EQ expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . NE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On SUB shift to state 43
+-- On NE shift to state 53
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQ shift to state 67
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On AND shift to state 69
+-- On ADD shift to state 57
+## Reductions:
+-- On WHILE UNTIL THEN SEMICOLON RETURN REPEAT OR OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO CSQUARE CPAREN COMMA CBRACE BREAK
+--   reduce production expr -> expr OR expr
+
+State 53:
+## Known stack suffix:
+## expr NE
+## LR(1) items:
+expr -> expr NE . expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 54
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 54:
+## Known stack suffix:
+## expr NE expr
+## LR(1) items:
+expr -> expr . AND expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . OR expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . ADD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . SUB expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MUL expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . DIV expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MOD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . CONCAT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . EQ expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . NE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr NE expr . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On SUB shift to state 43
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On ADD shift to state 57
+## Reductions:
+-- On WHILE UNTIL THEN SEMICOLON RETURN REPEAT OR OPAREN NE LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO CSQUARE CPAREN COMMA CBRACE BREAK AND
+--   reduce production expr -> expr NE expr
+
+State 55:
+## Known stack suffix:
+## expr CONCAT
+## LR(1) items:
+expr -> expr CONCAT . expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 56
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 56:
+## Known stack suffix:
+## expr CONCAT expr
+## LR(1) items:
+expr -> expr . AND expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . OR expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . ADD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . SUB expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MUL expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . DIV expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MOD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . CONCAT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr CONCAT expr . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . EQ expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . NE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On SUB shift to state 43
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On ADD shift to state 57
+## Reductions:
+-- On WHILE UNTIL THEN SEMICOLON RETURN REPEAT OR OPAREN NE LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO CSQUARE CPAREN COMMA CBRACE BREAK AND
+--   reduce production expr -> expr CONCAT expr
+
+State 57:
+## Known stack suffix:
+## expr ADD
+## LR(1) items:
+expr -> expr ADD . expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 58
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 58:
+## Known stack suffix:
+## expr ADD expr
+## LR(1) items:
+expr -> expr . AND expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . OR expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . ADD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr ADD expr . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . SUB expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MUL expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . DIV expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MOD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . CONCAT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . EQ expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . NE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On DIV shift to state 49
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production expr -> expr ADD expr
+
+State 59:
+## Known stack suffix:
+## expr LT
+## LR(1) items:
+expr -> expr LT . expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 60
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 60:
+## Known stack suffix:
+## expr LT expr
+## LR(1) items:
+expr -> expr . AND expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . OR expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . ADD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . SUB expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MUL expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . DIV expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MOD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . CONCAT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . EQ expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . NE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr LT expr . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On SUB shift to state 43
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On ADD shift to state 57
+## Reductions:
+-- On WHILE UNTIL THEN SEMICOLON RETURN REPEAT OR OPAREN NE LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO CSQUARE CPAREN COMMA CBRACE BREAK AND
+--   reduce production expr -> expr LT expr
+
+State 61:
+## Known stack suffix:
+## expr LE
+## LR(1) items:
+expr -> expr LE . expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 62
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 62:
+## Known stack suffix:
+## expr LE expr
+## LR(1) items:
+expr -> expr . AND expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . OR expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . ADD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . SUB expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MUL expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . DIV expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MOD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . CONCAT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . EQ expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . NE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr LE expr . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On SUB shift to state 43
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On ADD shift to state 57
+## Reductions:
+-- On WHILE UNTIL THEN SEMICOLON RETURN REPEAT OR OPAREN NE LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO CSQUARE CPAREN COMMA CBRACE BREAK AND
+--   reduce production expr -> expr LE expr
+
+State 63:
+## Known stack suffix:
+## expr GT
+## LR(1) items:
+expr -> expr GT . expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 64
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 64:
+## Known stack suffix:
+## expr GT expr
+## LR(1) items:
+expr -> expr . AND expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . OR expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . ADD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . SUB expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MUL expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . DIV expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MOD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . CONCAT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . EQ expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . NE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr GT expr . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On SUB shift to state 43
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On ADD shift to state 57
+## Reductions:
+-- On WHILE UNTIL THEN SEMICOLON RETURN REPEAT OR OPAREN NE LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO CSQUARE CPAREN COMMA CBRACE BREAK AND
+--   reduce production expr -> expr GT expr
+
+State 65:
+## Known stack suffix:
+## expr GE
+## LR(1) items:
+expr -> expr GE . expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 66
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 66:
+## Known stack suffix:
+## expr GE expr
+## LR(1) items:
+expr -> expr . AND expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . OR expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . ADD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . SUB expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MUL expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . DIV expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MOD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . CONCAT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . EQ expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . NE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr GE expr . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On SUB shift to state 43
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On ADD shift to state 57
+## Reductions:
+-- On WHILE UNTIL THEN SEMICOLON RETURN REPEAT OR OPAREN NE LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO CSQUARE CPAREN COMMA CBRACE BREAK AND
+--   reduce production expr -> expr GE expr
+
+State 67:
+## Known stack suffix:
+## expr EQ
+## LR(1) items:
+expr -> expr EQ . expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 68
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 68:
+## Known stack suffix:
+## expr EQ expr
+## LR(1) items:
+expr -> expr . AND expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . OR expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . ADD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . SUB expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MUL expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . DIV expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MOD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . CONCAT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . EQ expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr EQ expr . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . NE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On SUB shift to state 43
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On ADD shift to state 57
+## Reductions:
+-- On WHILE UNTIL THEN SEMICOLON RETURN REPEAT OR OPAREN NE LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO CSQUARE CPAREN COMMA CBRACE BREAK AND
+--   reduce production expr -> expr EQ expr
+
+State 69:
+## Known stack suffix:
+## expr AND
+## LR(1) items:
+expr -> expr AND . expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 70
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 70:
+## Known stack suffix:
+## expr AND expr
+## LR(1) items:
+expr -> expr . AND expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr AND expr . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . OR expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . ADD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . SUB expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MUL expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . DIV expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . MOD expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . CONCAT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . EQ expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . NE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . LE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GT expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr -> expr . GE expr [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On SUB shift to state 43
+-- On NE shift to state 53
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQ shift to state 67
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On ADD shift to state 57
+## Reductions:
+-- On WHILE UNTIL THEN SEMICOLON RETURN REPEAT OR OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO CSQUARE CPAREN COMMA CBRACE BREAK AND
+--   reduce production expr -> expr AND expr
+
+State 71:
+## Known stack suffix:
+## simple_expr OSQUARE expr CSQUARE
+## LR(1) items:
+name -> simple_expr OSQUARE expr CSQUARE . [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQUALS EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQUALS EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD
+--   reduce production name -> simple_expr OSQUARE expr CSQUARE
+
+State 72:
+## Known stack suffix:
+## OPAREN
+## LR(1) items:
+call_args -> OPAREN . sep_list0(COMMA,expr) CPAREN [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On sep_list1(COMMA,expr) shift to state 73
+-- On sep_list0(COMMA,expr) shift to state 76
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 78
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+-- On CPAREN
+--   reduce production sep_list0(COMMA,expr) ->
+
+State 73:
+## Known stack suffix:
+## sep_list1(COMMA,expr)
+## LR(1) items:
+sep_list0(COMMA,expr) -> sep_list1(COMMA,expr) . [ UNTIL SEMICOLON EOF END ELSEIF ELSE CPAREN ]
+sep_list1(COMMA,expr) -> sep_list1(COMMA,expr) . COMMA expr [ UNTIL SEMICOLON EOF END ELSEIF ELSE CPAREN COMMA ]
+## Transitions:
+-- On COMMA shift to state 74
+## Reductions:
+-- On UNTIL SEMICOLON EOF END ELSEIF ELSE CPAREN
+--   reduce production sep_list0(COMMA,expr) -> sep_list1(COMMA,expr)
+
+State 74:
+## Known stack suffix:
+## sep_list1(COMMA,expr) COMMA
+## LR(1) items:
+sep_list1(COMMA,expr) -> sep_list1(COMMA,expr) COMMA . expr [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO CPAREN COMMA BREAK ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 75
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 75:
+## Known stack suffix:
+## sep_list1(COMMA,expr) COMMA expr
+## LR(1) items:
+expr -> expr . AND expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . OR expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . ADD expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . SUB expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . MUL expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . DIV expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . MOD expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . CONCAT expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . EQ expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . NE expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . LT expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . LE expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . GT expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . GE expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+sep_list1(COMMA,expr) -> sep_list1(COMMA,expr) COMMA expr . [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO CPAREN COMMA BREAK ]
+## Transitions:
+-- On SUB shift to state 43
+-- On OR shift to state 51
+-- On NE shift to state 53
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQ shift to state 67
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On AND shift to state 69
+-- On ADD shift to state 57
+## Reductions:
+-- On WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO CPAREN COMMA BREAK
+--   reduce production sep_list1(COMMA,expr) -> sep_list1(COMMA,expr) COMMA expr
+
+State 76:
+## Known stack suffix:
+## OPAREN sep_list0(COMMA,expr)
+## LR(1) items:
+call_args -> OPAREN sep_list0(COMMA,expr) . CPAREN [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+-- On CPAREN shift to state 77
+## Reductions:
+
+State 77:
+## Known stack suffix:
+## OPAREN sep_list0(COMMA,expr) CPAREN
+## LR(1) items:
+call_args -> OPAREN sep_list0(COMMA,expr) CPAREN . [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD
+--   reduce production call_args -> OPAREN sep_list0(COMMA,expr) CPAREN
+
+State 78:
+## Known stack suffix:
+## expr
+## LR(1) items:
+expr -> expr . AND expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . OR expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . ADD expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . SUB expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . MUL expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . DIV expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . MOD expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . CONCAT expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . EQ expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . NE expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . LT expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . LE expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . GT expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+expr -> expr . GE expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CPAREN CONCAT COMMA BREAK AND ADD ]
+sep_list1(COMMA,expr) -> expr . [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO CPAREN COMMA BREAK ]
+## Transitions:
+-- On SUB shift to state 43
+-- On OR shift to state 51
+-- On NE shift to state 53
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQ shift to state 67
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On AND shift to state 69
+-- On ADD shift to state 57
+## Reductions:
+-- On WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO CPAREN COMMA BREAK
+--   reduce production sep_list1(COMMA,expr) -> expr
+
+State 79:
+## Known stack suffix:
+## simple_expr DOT
+## LR(1) items:
+name -> simple_expr DOT . IDENT [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQUALS EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+-- On IDENT shift to state 80
+## Reductions:
+
+State 80:
+## Known stack suffix:
+## simple_expr DOT IDENT
+## LR(1) items:
+name -> simple_expr DOT IDENT . [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQUALS EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQUALS EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD
+--   reduce production name -> simple_expr DOT IDENT
+
+State 81:
+## Known stack suffix:
+## simple_expr COLON
+## LR(1) items:
+call -> simple_expr COLON . IDENT call_args [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+-- On IDENT shift to state 82
+## Reductions:
+
+State 82:
+## Known stack suffix:
+## simple_expr COLON IDENT
+## LR(1) items:
+call -> simple_expr COLON IDENT . call_args [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+-- On STRING shift to state 34
+-- On OPAREN shift to state 72
+-- On OBRACE shift to state 9
+-- On table shift to state 83
+-- On call_args shift to state 84
+## Reductions:
+
+State 83:
+## Known stack suffix:
+## table
+## LR(1) items:
+call_args -> table . [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD
+--   reduce production call_args -> table
+
+State 84:
+## Known stack suffix:
+## simple_expr COLON IDENT call_args
+## LR(1) items:
+call -> simple_expr COLON IDENT call_args . [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD
+--   reduce production call -> simple_expr COLON IDENT call_args
+
+State 85:
+## Known stack suffix:
+## simple_expr call_args
+## LR(1) items:
+call -> simple_expr call_args . [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD
+--   reduce production call -> simple_expr call_args
+
+State 86:
+## Known stack suffix:
+## LEN expr_pow
+## LR(1) items:
+expr_pow -> expr_pow . POW expr_pow [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr_pow -> LEN expr_pow . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On POW shift to state 38
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production expr_pow -> LEN expr_pow
+
+State 87:
+## Known stack suffix:
+## NOT expr_pow
+## LR(1) items:
+expr_pow -> expr_pow . POW expr_pow [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr_pow -> NOT expr_pow . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On POW shift to state 38
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production expr_pow -> NOT expr_pow
+
+State 88:
+## Known stack suffix:
+## OSQUARE expr
+## LR(1) items:
+expr -> expr . AND expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . OR expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . ADD expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . SUB expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . MUL expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . DIV expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . MOD expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . CONCAT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . EQ expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . NE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . LT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . LE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . GT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+expr -> expr . GE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CSQUARE CONCAT AND ADD ]
+table_entry -> OSQUARE expr . CSQUARE EQUALS expr [ SEMICOLON COMMA CBRACE ]
+## Transitions:
+-- On SUB shift to state 43
+-- On OR shift to state 51
+-- On NE shift to state 53
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQ shift to state 67
+-- On DIV shift to state 49
+-- On CSQUARE shift to state 89
+-- On CONCAT shift to state 55
+-- On AND shift to state 69
+-- On ADD shift to state 57
+## Reductions:
+
+State 89:
+## Known stack suffix:
+## OSQUARE expr CSQUARE
+## LR(1) items:
+table_entry -> OSQUARE expr CSQUARE . EQUALS expr [ SEMICOLON COMMA CBRACE ]
+## Transitions:
+-- On EQUALS shift to state 90
+## Reductions:
+
+State 90:
+## Known stack suffix:
+## OSQUARE expr CSQUARE EQUALS
+## LR(1) items:
+table_entry -> OSQUARE expr CSQUARE EQUALS . expr [ SEMICOLON COMMA CBRACE ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 91
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 91:
+## Known stack suffix:
+## OSQUARE expr CSQUARE EQUALS expr
+## LR(1) items:
+expr -> expr . AND expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . OR expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . ADD expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . SUB expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . MUL expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . DIV expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . MOD expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . CONCAT expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . EQ expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . NE expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . LT expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . LE expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . GT expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . GE expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+table_entry -> OSQUARE expr CSQUARE EQUALS expr . [ SEMICOLON COMMA CBRACE ]
+## Transitions:
+-- On SUB shift to state 43
+-- On OR shift to state 51
+-- On NE shift to state 53
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQ shift to state 67
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On AND shift to state 69
+-- On ADD shift to state 57
+## Reductions:
+-- On SEMICOLON COMMA CBRACE
+--   reduce production table_entry -> OSQUARE expr CSQUARE EQUALS expr
+
+State 92:
+## Known stack suffix:
+## IDENT
+## LR(1) items:
+table_entry -> IDENT . EQUALS expr [ SEMICOLON COMMA CBRACE ]
+var -> IDENT . [ SUB STRING SEMICOLON POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LE GT GE EQ DOT DIV CONCAT COMMA COLON CBRACE AND ADD ]
+## Transitions:
+-- On EQUALS shift to state 93
+## Reductions:
+-- On SUB STRING SEMICOLON POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LE GT GE EQ DOT DIV CONCAT COMMA COLON CBRACE AND ADD
+--   reduce production var -> IDENT
+
+State 93:
+## Known stack suffix:
+## IDENT EQUALS
+## LR(1) items:
+table_entry -> IDENT EQUALS . expr [ SEMICOLON COMMA CBRACE ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 94
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 94:
+## Known stack suffix:
+## IDENT EQUALS expr
+## LR(1) items:
+expr -> expr . AND expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . OR expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . ADD expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . SUB expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . MUL expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . DIV expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . MOD expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . CONCAT expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . EQ expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . NE expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . LT expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . LE expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . GT expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . GE expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+table_entry -> IDENT EQUALS expr . [ SEMICOLON COMMA CBRACE ]
+## Transitions:
+-- On SUB shift to state 43
+-- On OR shift to state 51
+-- On NE shift to state 53
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQ shift to state 67
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On AND shift to state 69
+-- On ADD shift to state 57
+## Reductions:
+-- On SEMICOLON COMMA CBRACE
+--   reduce production table_entry -> IDENT EQUALS expr
+
+State 95:
+## Known stack suffix:
+## table_entry
+## LR(1) items:
+table_body -> table_entry . [ CBRACE ]
+table_body -> table_entry . table_sep table_body [ CBRACE ]
+## Transitions:
+-- On SEMICOLON shift to state 96
+-- On COMMA shift to state 97
+-- On table_sep shift to state 98
+## Reductions:
+-- On CBRACE
+--   reduce production table_body -> table_entry
+
+State 96:
+## Known stack suffix:
+## SEMICOLON
+## LR(1) items:
+table_sep -> SEMICOLON . [ TRUE SUB STRING OSQUARE OPAREN OBRACE NUMBER NOT NIL LEN IDENT FUNCTION FALSE DOTS CBRACE ]
+## Transitions:
+## Reductions:
+-- On TRUE SUB STRING OSQUARE OPAREN OBRACE NUMBER NOT NIL LEN IDENT FUNCTION FALSE DOTS CBRACE
+--   reduce production table_sep -> SEMICOLON
+
+State 97:
+## Known stack suffix:
+## COMMA
+## LR(1) items:
+table_sep -> COMMA . [ TRUE SUB STRING OSQUARE OPAREN OBRACE NUMBER NOT NIL LEN IDENT FUNCTION FALSE DOTS CBRACE ]
+## Transitions:
+## Reductions:
+-- On TRUE SUB STRING OSQUARE OPAREN OBRACE NUMBER NOT NIL LEN IDENT FUNCTION FALSE DOTS CBRACE
+--   reduce production table_sep -> COMMA
+
+State 98:
+## Known stack suffix:
+## table_entry table_sep
+## LR(1) items:
+table_body -> table_entry table_sep . table_body [ CBRACE ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OSQUARE shift to state 10
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 92
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table_entry shift to state 95
+-- On table_body shift to state 99
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 100
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+-- On CBRACE
+--   reduce production table_body ->
+
+State 99:
+## Known stack suffix:
+## table_entry table_sep table_body
+## LR(1) items:
+table_body -> table_entry table_sep table_body . [ CBRACE ]
+## Transitions:
+## Reductions:
+-- On CBRACE
+--   reduce production table_body -> table_entry table_sep table_body
+
+State 100:
+## Known stack suffix:
+## expr
+## LR(1) items:
+expr -> expr . AND expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . OR expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . ADD expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . SUB expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . MUL expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . DIV expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . MOD expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . CONCAT expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . EQ expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . NE expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . LT expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . LE expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . GT expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+expr -> expr . GE expr [ SUB SEMICOLON OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA CBRACE AND ADD ]
+table_entry -> expr . [ SEMICOLON COMMA CBRACE ]
+## Transitions:
+-- On SUB shift to state 43
+-- On OR shift to state 51
+-- On NE shift to state 53
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQ shift to state 67
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On AND shift to state 69
+-- On ADD shift to state 57
+## Reductions:
+-- On SEMICOLON COMMA CBRACE
+--   reduce production table_entry -> expr
+
+State 101:
+## Known stack suffix:
+## OBRACE table_body
+## LR(1) items:
+table -> OBRACE table_body . CBRACE [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+-- On CBRACE shift to state 102
+## Reductions:
+
+State 102:
+## Known stack suffix:
+## OBRACE table_body CBRACE
+## LR(1) items:
+table -> OBRACE table_body CBRACE . [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD
+--   reduce production table -> OBRACE table_body CBRACE
+
+State 103:
+## Known stack suffix:
+## OPAREN expr
+## LR(1) items:
+expr -> expr . AND expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CPAREN CONCAT AND ADD ]
+expr -> expr . OR expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CPAREN CONCAT AND ADD ]
+expr -> expr . ADD expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CPAREN CONCAT AND ADD ]
+expr -> expr . SUB expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CPAREN CONCAT AND ADD ]
+expr -> expr . MUL expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CPAREN CONCAT AND ADD ]
+expr -> expr . DIV expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CPAREN CONCAT AND ADD ]
+expr -> expr . MOD expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CPAREN CONCAT AND ADD ]
+expr -> expr . CONCAT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CPAREN CONCAT AND ADD ]
+expr -> expr . EQ expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CPAREN CONCAT AND ADD ]
+expr -> expr . NE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CPAREN CONCAT AND ADD ]
+expr -> expr . LT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CPAREN CONCAT AND ADD ]
+expr -> expr . LE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CPAREN CONCAT AND ADD ]
+expr -> expr . GT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CPAREN CONCAT AND ADD ]
+expr -> expr . GE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CPAREN CONCAT AND ADD ]
+simple_expr -> OPAREN expr . CPAREN [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+-- On SUB shift to state 43
+-- On OR shift to state 51
+-- On NE shift to state 53
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQ shift to state 67
+-- On DIV shift to state 49
+-- On CPAREN shift to state 104
+-- On CONCAT shift to state 55
+-- On AND shift to state 69
+-- On ADD shift to state 57
+## Reductions:
+
+State 104:
+## Known stack suffix:
+## OPAREN expr CPAREN
+## LR(1) items:
+simple_expr -> OPAREN expr CPAREN . [ WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL THEN SUB STRING SEMICOLON RETURN REPEAT POW OSQUARE OR OPAREN OBRACE NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DOT DO DIV CSQUARE CPAREN CONCAT COMMA COLON CBRACE BREAK AND ADD
+--   reduce production simple_expr -> OPAREN expr CPAREN
+
+State 105:
+## Known stack suffix:
+## SUB expr_pow
+## LR(1) items:
+expr_pow -> expr_pow . POW expr_pow [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+expr_pow -> SUB expr_pow . [ WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT POW OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD ]
+## Transitions:
+-- On POW shift to state 38
+## Reductions:
+-- On WHILE UNTIL THEN SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CSQUARE CPAREN CONCAT COMMA CBRACE BREAK AND ADD
+--   reduce production expr_pow -> SUB expr_pow
+
+State 106:
+## Known stack suffix:
+## WHILE expr
+## LR(1) items:
+expr -> expr . AND expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . OR expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . ADD expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . SUB expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . MUL expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . DIV expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . MOD expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . CONCAT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . EQ expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . NE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . LT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . LE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . GT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . GE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+stmt -> WHILE expr . DO stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On SUB shift to state 43
+-- On OR shift to state 51
+-- On NE shift to state 53
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQ shift to state 67
+-- On DO shift to state 107
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On AND shift to state 69
+-- On ADD shift to state 57
+## Reductions:
+
+State 107:
+## Known stack suffix:
+## WHILE expr DO
+## LR(1) items:
+stmt -> WHILE expr DO . stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On stmts shift to state 108
+-- On rlist(__anonymous_0) shift to state 3
+## Reductions:
+-- On WHILE RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR END DO BREAK
+--   reduce production rlist(__anonymous_0) ->
+
+State 108:
+## Known stack suffix:
+## WHILE expr DO stmts
+## LR(1) items:
+stmt -> WHILE expr DO stmts . END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On END shift to state 109
+## Reductions:
+
+State 109:
+## Known stack suffix:
+## WHILE expr DO stmts END
+## LR(1) items:
+stmt -> WHILE expr DO stmts END . [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK
+--   reduce production stmt -> WHILE expr DO stmts END
+
+State 110:
+## Known stack suffix:
+## RETURN
+## LR(1) items:
+last_stat -> RETURN . sep_list0(COMMA,expr) [ UNTIL EOF END ELSEIF ELSE ]
+last_stat -> RETURN . sep_list0(COMMA,expr) SEMICOLON [ UNTIL EOF END ELSEIF ELSE ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On sep_list1(COMMA,expr) shift to state 73
+-- On sep_list0(COMMA,expr) shift to state 111
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 78
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+-- On UNTIL SEMICOLON EOF END ELSEIF ELSE
+--   reduce production sep_list0(COMMA,expr) ->
+
+State 111:
+## Known stack suffix:
+## RETURN sep_list0(COMMA,expr)
+## LR(1) items:
+last_stat -> RETURN sep_list0(COMMA,expr) . [ UNTIL EOF END ELSEIF ELSE ]
+last_stat -> RETURN sep_list0(COMMA,expr) . SEMICOLON [ UNTIL EOF END ELSEIF ELSE ]
+## Transitions:
+-- On SEMICOLON shift to state 112
+## Reductions:
+-- On UNTIL EOF END ELSEIF ELSE
+--   reduce production last_stat -> RETURN sep_list0(COMMA,expr)
+
+State 112:
+## Known stack suffix:
+## RETURN sep_list0(COMMA,expr) SEMICOLON
+## LR(1) items:
+last_stat -> RETURN sep_list0(COMMA,expr) SEMICOLON . [ UNTIL EOF END ELSEIF ELSE ]
+## Transitions:
+## Reductions:
+-- On UNTIL EOF END ELSEIF ELSE
+--   reduce production last_stat -> RETURN sep_list0(COMMA,expr) SEMICOLON
+
+State 113:
+## Known stack suffix:
+## REPEAT
+## LR(1) items:
+stmt -> REPEAT . stmts UNTIL expr [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On stmts shift to state 114
+-- On rlist(__anonymous_0) shift to state 3
+## Reductions:
+-- On WHILE UNTIL RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR DO BREAK
+--   reduce production rlist(__anonymous_0) ->
+
+State 114:
+## Known stack suffix:
+## REPEAT stmts
+## LR(1) items:
+stmt -> REPEAT stmts . UNTIL expr [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On UNTIL shift to state 115
+## Reductions:
+
+State 115:
+## Known stack suffix:
+## REPEAT stmts UNTIL
+## LR(1) items:
+stmt -> REPEAT stmts UNTIL . expr [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 116
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 116:
+## Known stack suffix:
+## REPEAT stmts UNTIL expr
+## LR(1) items:
+expr -> expr . AND expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CONCAT BREAK AND ADD ]
+expr -> expr . OR expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CONCAT BREAK AND ADD ]
+expr -> expr . ADD expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CONCAT BREAK AND ADD ]
+expr -> expr . SUB expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CONCAT BREAK AND ADD ]
+expr -> expr . MUL expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CONCAT BREAK AND ADD ]
+expr -> expr . DIV expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CONCAT BREAK AND ADD ]
+expr -> expr . MOD expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CONCAT BREAK AND ADD ]
+expr -> expr . CONCAT expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CONCAT BREAK AND ADD ]
+expr -> expr . EQ expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CONCAT BREAK AND ADD ]
+expr -> expr . NE expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CONCAT BREAK AND ADD ]
+expr -> expr . LT expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CONCAT BREAK AND ADD ]
+expr -> expr . LE expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CONCAT BREAK AND ADD ]
+expr -> expr . GT expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CONCAT BREAK AND ADD ]
+expr -> expr . GE expr [ WHILE UNTIL SUB SEMICOLON RETURN REPEAT OR OPAREN NE MUL MOD LT LOCAL LE IF IDENT GT GE FUNCTION FOR EQ EOF END ELSEIF ELSE DO DIV CONCAT BREAK AND ADD ]
+stmt -> REPEAT stmts UNTIL expr . [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On SUB shift to state 43
+-- On OR shift to state 51
+-- On NE shift to state 53
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQ shift to state 67
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On AND shift to state 69
+-- On ADD shift to state 57
+## Reductions:
+-- On WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK
+--   reduce production stmt -> REPEAT stmts UNTIL expr
+
+State 117:
+## Known stack suffix:
+## LOCAL
+## LR(1) items:
+stmt -> LOCAL . sep_list1(COMMA,var) option(__anonymous_3) [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+stmt -> LOCAL . FUNCTION var args stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 118
+-- On var shift to state 123
+-- On sep_list1(COMMA,var) shift to state 124
+## Reductions:
+
+State 118:
+## Known stack suffix:
+## LOCAL FUNCTION
+## LR(1) items:
+stmt -> LOCAL FUNCTION . var args stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On IDENT shift to state 15
+-- On var shift to state 119
+## Reductions:
+
+State 119:
+## Known stack suffix:
+## LOCAL FUNCTION var
+## LR(1) items:
+stmt -> LOCAL FUNCTION var . args stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On OPAREN shift to state 17
+-- On args shift to state 120
+## Reductions:
+
+State 120:
+## Known stack suffix:
+## LOCAL FUNCTION var args
+## LR(1) items:
+stmt -> LOCAL FUNCTION var args . stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On stmts shift to state 121
+-- On rlist(__anonymous_0) shift to state 3
+## Reductions:
+-- On WHILE RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR END DO BREAK
+--   reduce production rlist(__anonymous_0) ->
+
+State 121:
+## Known stack suffix:
+## LOCAL FUNCTION var args stmts
+## LR(1) items:
+stmt -> LOCAL FUNCTION var args stmts . END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On END shift to state 122
+## Reductions:
+
+State 122:
+## Known stack suffix:
+## LOCAL FUNCTION var args stmts END
+## LR(1) items:
+stmt -> LOCAL FUNCTION var args stmts END . [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK
+--   reduce production stmt -> LOCAL FUNCTION var args stmts END
+
+State 123:
+## Known stack suffix:
+## var
+## LR(1) items:
+sep_list1(COMMA,var) -> var . [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EQUALS EOF END ELSEIF ELSE DO COMMA BREAK ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EQUALS EOF END ELSEIF ELSE DO COMMA BREAK
+--   reduce production sep_list1(COMMA,var) -> var
+
+State 124:
+## Known stack suffix:
+## LOCAL sep_list1(COMMA,var)
+## LR(1) items:
+sep_list1(COMMA,var) -> sep_list1(COMMA,var) . COMMA var [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EQUALS EOF END ELSEIF ELSE DO COMMA BREAK ]
+stmt -> LOCAL sep_list1(COMMA,var) . option(__anonymous_3) [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On EQUALS shift to state 125
+-- On COMMA shift to state 127
+-- On option(__anonymous_3) shift to state 129
+## Reductions:
+-- On WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK
+--   reduce production option(__anonymous_3) ->
+
+State 125:
+## Known stack suffix:
+## EQUALS
+## LR(1) items:
+option(__anonymous_3) -> EQUALS . sep_list1(COMMA,expr) [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On sep_list1(COMMA,expr) shift to state 126
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 78
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 126:
+## Known stack suffix:
+## EQUALS sep_list1(COMMA,expr)
+## LR(1) items:
+option(__anonymous_3) -> EQUALS sep_list1(COMMA,expr) . [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+sep_list1(COMMA,expr) -> sep_list1(COMMA,expr) . COMMA expr [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO COMMA BREAK ]
+## Transitions:
+-- On COMMA shift to state 74
+## Reductions:
+-- On WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK
+--   reduce production option(__anonymous_3) -> EQUALS sep_list1(COMMA,expr)
+
+State 127:
+## Known stack suffix:
+## sep_list1(COMMA,var) COMMA
+## LR(1) items:
+sep_list1(COMMA,var) -> sep_list1(COMMA,var) COMMA . var [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IN IF IDENT FUNCTION FOR EQUALS EOF END ELSEIF ELSE DO COMMA BREAK ]
+## Transitions:
+-- On IDENT shift to state 15
+-- On var shift to state 128
+## Reductions:
+
+State 128:
+## Known stack suffix:
+## sep_list1(COMMA,var) COMMA var
+## LR(1) items:
+sep_list1(COMMA,var) -> sep_list1(COMMA,var) COMMA var . [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IN IF IDENT FUNCTION FOR EQUALS EOF END ELSEIF ELSE DO COMMA BREAK ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IN IF IDENT FUNCTION FOR EQUALS EOF END ELSEIF ELSE DO COMMA BREAK
+--   reduce production sep_list1(COMMA,var) -> sep_list1(COMMA,var) COMMA var
+
+State 129:
+## Known stack suffix:
+## LOCAL sep_list1(COMMA,var) option(__anonymous_3)
+## LR(1) items:
+stmt -> LOCAL sep_list1(COMMA,var) option(__anonymous_3) . [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK
+--   reduce production stmt -> LOCAL sep_list1(COMMA,var) option(__anonymous_3)
+
+State 130:
+## Known stack suffix:
+## IF
+## LR(1) items:
+stmt -> IF . expr THEN stmts rlist(if_clause(ELSEIF)) option(__anonymous_1) END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 131
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 131:
+## Known stack suffix:
+## IF expr
+## LR(1) items:
+expr -> expr . AND expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . OR expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . ADD expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . SUB expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . MUL expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . DIV expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . MOD expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . CONCAT expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . EQ expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . NE expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . LT expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . LE expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . GT expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . GE expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+stmt -> IF expr . THEN stmts rlist(if_clause(ELSEIF)) option(__anonymous_1) END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On THEN shift to state 132
+-- On SUB shift to state 43
+-- On OR shift to state 51
+-- On NE shift to state 53
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQ shift to state 67
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On AND shift to state 69
+-- On ADD shift to state 57
+## Reductions:
+
+State 132:
+## Known stack suffix:
+## IF expr THEN
+## LR(1) items:
+stmt -> IF expr THEN . stmts rlist(if_clause(ELSEIF)) option(__anonymous_1) END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On stmts shift to state 133
+-- On rlist(__anonymous_0) shift to state 3
+## Reductions:
+-- On WHILE RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR END ELSEIF ELSE DO BREAK
+--   reduce production rlist(__anonymous_0) ->
+
+State 133:
+## Known stack suffix:
+## IF expr THEN stmts
+## LR(1) items:
+stmt -> IF expr THEN stmts . rlist(if_clause(ELSEIF)) option(__anonymous_1) END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On rlist(if_clause(ELSEIF)) shift to state 134
+## Reductions:
+-- On END ELSEIF ELSE
+--   reduce production rlist(if_clause(ELSEIF)) ->
+
+State 134:
+## Known stack suffix:
+## IF expr THEN stmts rlist(if_clause(ELSEIF))
+## LR(1) items:
+rlist(if_clause(ELSEIF)) -> rlist(if_clause(ELSEIF)) . ELSEIF expr THEN stmts [ END ELSEIF ELSE ]
+stmt -> IF expr THEN stmts rlist(if_clause(ELSEIF)) . option(__anonymous_1) END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On ELSEIF shift to state 135
+-- On ELSE shift to state 139
+-- On option(__anonymous_1) shift to state 141
+## Reductions:
+-- On END
+--   reduce production option(__anonymous_1) ->
+
+State 135:
+## Known stack suffix:
+## rlist(if_clause(ELSEIF)) ELSEIF
+## LR(1) items:
+rlist(if_clause(ELSEIF)) -> rlist(if_clause(ELSEIF)) ELSEIF . expr THEN stmts [ END ELSEIF ELSE ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 136
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 136:
+## Known stack suffix:
+## rlist(if_clause(ELSEIF)) ELSEIF expr
+## LR(1) items:
+expr -> expr . AND expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . OR expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . ADD expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . SUB expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . MUL expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . DIV expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . MOD expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . CONCAT expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . EQ expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . NE expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . LT expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . LE expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . GT expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+expr -> expr . GE expr [ THEN SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT AND ADD ]
+rlist(if_clause(ELSEIF)) -> rlist(if_clause(ELSEIF)) ELSEIF expr . THEN stmts [ END ELSEIF ELSE ]
+## Transitions:
+-- On THEN shift to state 137
+-- On SUB shift to state 43
+-- On OR shift to state 51
+-- On NE shift to state 53
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQ shift to state 67
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On AND shift to state 69
+-- On ADD shift to state 57
+## Reductions:
+
+State 137:
+## Known stack suffix:
+## rlist(if_clause(ELSEIF)) ELSEIF expr THEN
+## LR(1) items:
+rlist(if_clause(ELSEIF)) -> rlist(if_clause(ELSEIF)) ELSEIF expr THEN . stmts [ END ELSEIF ELSE ]
+## Transitions:
+-- On stmts shift to state 138
+-- On rlist(__anonymous_0) shift to state 3
+## Reductions:
+-- On WHILE RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR END ELSEIF ELSE DO BREAK
+--   reduce production rlist(__anonymous_0) ->
+
+State 138:
+## Known stack suffix:
+## rlist(if_clause(ELSEIF)) ELSEIF expr THEN stmts
+## LR(1) items:
+rlist(if_clause(ELSEIF)) -> rlist(if_clause(ELSEIF)) ELSEIF expr THEN stmts . [ END ELSEIF ELSE ]
+## Transitions:
+## Reductions:
+-- On END ELSEIF ELSE
+--   reduce production rlist(if_clause(ELSEIF)) -> rlist(if_clause(ELSEIF)) ELSEIF expr THEN stmts
+
+State 139:
+## Known stack suffix:
+## ELSE
+## LR(1) items:
+option(__anonymous_1) -> ELSE . stmts [ END ]
+## Transitions:
+-- On stmts shift to state 140
+-- On rlist(__anonymous_0) shift to state 3
+## Reductions:
+-- On WHILE RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR END DO BREAK
+--   reduce production rlist(__anonymous_0) ->
+
+State 140:
+## Known stack suffix:
+## ELSE stmts
+## LR(1) items:
+option(__anonymous_1) -> ELSE stmts . [ END ]
+## Transitions:
+## Reductions:
+-- On END
+--   reduce production option(__anonymous_1) -> ELSE stmts
+
+State 141:
+## Known stack suffix:
+## IF expr THEN stmts rlist(if_clause(ELSEIF)) option(__anonymous_1)
+## LR(1) items:
+stmt -> IF expr THEN stmts rlist(if_clause(ELSEIF)) option(__anonymous_1) . END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On END shift to state 142
+## Reductions:
+
+State 142:
+## Known stack suffix:
+## IF expr THEN stmts rlist(if_clause(ELSEIF)) option(__anonymous_1) END
+## LR(1) items:
+stmt -> IF expr THEN stmts rlist(if_clause(ELSEIF)) option(__anonymous_1) END . [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK
+--   reduce production stmt -> IF expr THEN stmts rlist(if_clause(ELSEIF)) option(__anonymous_1) END
+
+State 143:
+## Known stack suffix:
+## FUNCTION
+## LR(1) items:
+stmt -> FUNCTION . function_name args stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On IDENT shift to state 15
+-- On var shift to state 144
+-- On function_name shift to state 145
+## Reductions:
+
+State 144:
+## Known stack suffix:
+## var
+## LR(1) items:
+function_name -> var . [ OPAREN DOT COLON ]
+## Transitions:
+## Reductions:
+-- On OPAREN DOT COLON
+--   reduce production function_name -> var
+
+State 145:
+## Known stack suffix:
+## FUNCTION function_name
+## LR(1) items:
+function_name -> function_name . DOT IDENT [ OPAREN DOT COLON ]
+function_name -> function_name . COLON IDENT [ OPAREN DOT COLON ]
+stmt -> FUNCTION function_name . args stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On OPAREN shift to state 17
+-- On DOT shift to state 146
+-- On COLON shift to state 148
+-- On args shift to state 150
+## Reductions:
+
+State 146:
+## Known stack suffix:
+## function_name DOT
+## LR(1) items:
+function_name -> function_name DOT . IDENT [ OPAREN DOT COLON ]
+## Transitions:
+-- On IDENT shift to state 147
+## Reductions:
+
+State 147:
+## Known stack suffix:
+## function_name DOT IDENT
+## LR(1) items:
+function_name -> function_name DOT IDENT . [ OPAREN DOT COLON ]
+## Transitions:
+## Reductions:
+-- On OPAREN DOT COLON
+--   reduce production function_name -> function_name DOT IDENT
+
+State 148:
+## Known stack suffix:
+## function_name COLON
+## LR(1) items:
+function_name -> function_name COLON . IDENT [ OPAREN DOT COLON ]
+## Transitions:
+-- On IDENT shift to state 149
+## Reductions:
+
+State 149:
+## Known stack suffix:
+## function_name COLON IDENT
+## LR(1) items:
+function_name -> function_name COLON IDENT . [ OPAREN DOT COLON ]
+## Transitions:
+## Reductions:
+-- On OPAREN DOT COLON
+--   reduce production function_name -> function_name COLON IDENT
+
+State 150:
+## Known stack suffix:
+## FUNCTION function_name args
+## LR(1) items:
+stmt -> FUNCTION function_name args . stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On stmts shift to state 151
+-- On rlist(__anonymous_0) shift to state 3
+## Reductions:
+-- On WHILE RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR END DO BREAK
+--   reduce production rlist(__anonymous_0) ->
+
+State 151:
+## Known stack suffix:
+## FUNCTION function_name args stmts
+## LR(1) items:
+stmt -> FUNCTION function_name args stmts . END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On END shift to state 152
+## Reductions:
+
+State 152:
+## Known stack suffix:
+## FUNCTION function_name args stmts END
+## LR(1) items:
+stmt -> FUNCTION function_name args stmts END . [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK
+--   reduce production stmt -> FUNCTION function_name args stmts END
+
+State 153:
+## Known stack suffix:
+## FOR
+## LR(1) items:
+stmt -> FOR . var EQUALS expr COMMA expr option(__anonymous_2) DO stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+stmt -> FOR . sep_list1(COMMA,var) IN sep_list1(COMMA,expr) DO stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On IDENT shift to state 15
+-- On var shift to state 154
+-- On sep_list1(COMMA,var) shift to state 165
+## Reductions:
+
+State 154:
+## Known stack suffix:
+## FOR var
+## LR(1) items:
+sep_list1(COMMA,var) -> var . [ IN COMMA ]
+stmt -> FOR var . EQUALS expr COMMA expr option(__anonymous_2) DO stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On EQUALS shift to state 155
+## Reductions:
+-- On IN COMMA
+--   reduce production sep_list1(COMMA,var) -> var
+
+State 155:
+## Known stack suffix:
+## FOR var EQUALS
+## LR(1) items:
+stmt -> FOR var EQUALS . expr COMMA expr option(__anonymous_2) DO stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 156
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 156:
+## Known stack suffix:
+## FOR var EQUALS expr
+## LR(1) items:
+expr -> expr . AND expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA AND ADD ]
+expr -> expr . OR expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA AND ADD ]
+expr -> expr . ADD expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA AND ADD ]
+expr -> expr . SUB expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA AND ADD ]
+expr -> expr . MUL expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA AND ADD ]
+expr -> expr . DIV expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA AND ADD ]
+expr -> expr . MOD expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA AND ADD ]
+expr -> expr . CONCAT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA AND ADD ]
+expr -> expr . EQ expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA AND ADD ]
+expr -> expr . NE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA AND ADD ]
+expr -> expr . LT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA AND ADD ]
+expr -> expr . LE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA AND ADD ]
+expr -> expr . GT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA AND ADD ]
+expr -> expr . GE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DIV CONCAT COMMA AND ADD ]
+stmt -> FOR var EQUALS expr . COMMA expr option(__anonymous_2) DO stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On SUB shift to state 43
+-- On OR shift to state 51
+-- On NE shift to state 53
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQ shift to state 67
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On COMMA shift to state 157
+-- On AND shift to state 69
+-- On ADD shift to state 57
+## Reductions:
+
+State 157:
+## Known stack suffix:
+## FOR var EQUALS expr COMMA
+## LR(1) items:
+stmt -> FOR var EQUALS expr COMMA . expr option(__anonymous_2) DO stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 158
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 158:
+## Known stack suffix:
+## FOR var EQUALS expr COMMA expr
+## LR(1) items:
+expr -> expr . AND expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT COMMA AND ADD ]
+expr -> expr . OR expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT COMMA AND ADD ]
+expr -> expr . ADD expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT COMMA AND ADD ]
+expr -> expr . SUB expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT COMMA AND ADD ]
+expr -> expr . MUL expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT COMMA AND ADD ]
+expr -> expr . DIV expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT COMMA AND ADD ]
+expr -> expr . MOD expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT COMMA AND ADD ]
+expr -> expr . CONCAT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT COMMA AND ADD ]
+expr -> expr . EQ expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT COMMA AND ADD ]
+expr -> expr . NE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT COMMA AND ADD ]
+expr -> expr . LT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT COMMA AND ADD ]
+expr -> expr . LE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT COMMA AND ADD ]
+expr -> expr . GT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT COMMA AND ADD ]
+expr -> expr . GE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT COMMA AND ADD ]
+stmt -> FOR var EQUALS expr COMMA expr . option(__anonymous_2) DO stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On SUB shift to state 43
+-- On OR shift to state 51
+-- On NE shift to state 53
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQ shift to state 67
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On COMMA shift to state 159
+-- On AND shift to state 69
+-- On ADD shift to state 57
+-- On option(__anonymous_2) shift to state 161
+## Reductions:
+-- On DO
+--   reduce production option(__anonymous_2) ->
+
+State 159:
+## Known stack suffix:
+## COMMA
+## LR(1) items:
+option(__anonymous_2) -> COMMA . expr [ DO ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 160
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 160:
+## Known stack suffix:
+## COMMA expr
+## LR(1) items:
+expr -> expr . AND expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . OR expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . ADD expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . SUB expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . MUL expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . DIV expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . MOD expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . CONCAT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . EQ expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . NE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . LT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . LE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . GT expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+expr -> expr . GE expr [ SUB OR NE MUL MOD LT LE GT GE EQ DO DIV CONCAT AND ADD ]
+option(__anonymous_2) -> COMMA expr . [ DO ]
+## Transitions:
+-- On SUB shift to state 43
+-- On OR shift to state 51
+-- On NE shift to state 53
+-- On MUL shift to state 45
+-- On MOD shift to state 47
+-- On LT shift to state 59
+-- On LE shift to state 61
+-- On GT shift to state 63
+-- On GE shift to state 65
+-- On EQ shift to state 67
+-- On DIV shift to state 49
+-- On CONCAT shift to state 55
+-- On AND shift to state 69
+-- On ADD shift to state 57
+## Reductions:
+-- On DO
+--   reduce production option(__anonymous_2) -> COMMA expr
+
+State 161:
+## Known stack suffix:
+## FOR var EQUALS expr COMMA expr option(__anonymous_2)
+## LR(1) items:
+stmt -> FOR var EQUALS expr COMMA expr option(__anonymous_2) . DO stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On DO shift to state 162
+## Reductions:
+
+State 162:
+## Known stack suffix:
+## FOR var EQUALS expr COMMA expr option(__anonymous_2) DO
+## LR(1) items:
+stmt -> FOR var EQUALS expr COMMA expr option(__anonymous_2) DO . stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On stmts shift to state 163
+-- On rlist(__anonymous_0) shift to state 3
+## Reductions:
+-- On WHILE RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR END DO BREAK
+--   reduce production rlist(__anonymous_0) ->
+
+State 163:
+## Known stack suffix:
+## FOR var EQUALS expr COMMA expr option(__anonymous_2) DO stmts
+## LR(1) items:
+stmt -> FOR var EQUALS expr COMMA expr option(__anonymous_2) DO stmts . END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On END shift to state 164
+## Reductions:
+
+State 164:
+## Known stack suffix:
+## FOR var EQUALS expr COMMA expr option(__anonymous_2) DO stmts END
+## LR(1) items:
+stmt -> FOR var EQUALS expr COMMA expr option(__anonymous_2) DO stmts END . [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK
+--   reduce production stmt -> FOR var EQUALS expr COMMA expr option(__anonymous_2) DO stmts END
+
+State 165:
+## Known stack suffix:
+## FOR sep_list1(COMMA,var)
+## LR(1) items:
+sep_list1(COMMA,var) -> sep_list1(COMMA,var) . COMMA var [ IN COMMA ]
+stmt -> FOR sep_list1(COMMA,var) . IN sep_list1(COMMA,expr) DO stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On IN shift to state 166
+-- On COMMA shift to state 127
+## Reductions:
+
+State 166:
+## Known stack suffix:
+## FOR sep_list1(COMMA,var) IN
+## LR(1) items:
+stmt -> FOR sep_list1(COMMA,var) IN . sep_list1(COMMA,expr) DO stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On sep_list1(COMMA,expr) shift to state 167
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 78
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 167:
+## Known stack suffix:
+## FOR sep_list1(COMMA,var) IN sep_list1(COMMA,expr)
+## LR(1) items:
+sep_list1(COMMA,expr) -> sep_list1(COMMA,expr) . COMMA expr [ DO COMMA ]
+stmt -> FOR sep_list1(COMMA,var) IN sep_list1(COMMA,expr) . DO stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On DO shift to state 168
+-- On COMMA shift to state 74
+## Reductions:
+
+State 168:
+## Known stack suffix:
+## FOR sep_list1(COMMA,var) IN sep_list1(COMMA,expr) DO
+## LR(1) items:
+stmt -> FOR sep_list1(COMMA,var) IN sep_list1(COMMA,expr) DO . stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On stmts shift to state 169
+-- On rlist(__anonymous_0) shift to state 3
+## Reductions:
+-- On WHILE RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR END DO BREAK
+--   reduce production rlist(__anonymous_0) ->
+
+State 169:
+## Known stack suffix:
+## FOR sep_list1(COMMA,var) IN sep_list1(COMMA,expr) DO stmts
+## LR(1) items:
+stmt -> FOR sep_list1(COMMA,var) IN sep_list1(COMMA,expr) DO stmts . END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On END shift to state 170
+## Reductions:
+
+State 170:
+## Known stack suffix:
+## FOR sep_list1(COMMA,var) IN sep_list1(COMMA,expr) DO stmts END
+## LR(1) items:
+stmt -> FOR sep_list1(COMMA,var) IN sep_list1(COMMA,expr) DO stmts END . [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK
+--   reduce production stmt -> FOR sep_list1(COMMA,var) IN sep_list1(COMMA,expr) DO stmts END
+
+State 171:
+## Known stack suffix:
+## DO
+## LR(1) items:
+stmt -> DO . stmts END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On stmts shift to state 172
+-- On rlist(__anonymous_0) shift to state 3
+## Reductions:
+-- On WHILE RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR END DO BREAK
+--   reduce production rlist(__anonymous_0) ->
+
+State 172:
+## Known stack suffix:
+## DO stmts
+## LR(1) items:
+stmt -> DO stmts . END [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On END shift to state 173
+## Reductions:
+
+State 173:
+## Known stack suffix:
+## DO stmts END
+## LR(1) items:
+stmt -> DO stmts END . [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK
+--   reduce production stmt -> DO stmts END
+
+State 174:
+## Known stack suffix:
+## BREAK
+## LR(1) items:
+last_stat -> BREAK . [ UNTIL EOF END ELSEIF ELSE ]
+last_stat -> BREAK . SEMICOLON [ UNTIL EOF END ELSEIF ELSE ]
+## Transitions:
+-- On SEMICOLON shift to state 175
+## Reductions:
+-- On UNTIL EOF END ELSEIF ELSE
+--   reduce production last_stat -> BREAK
+
+State 175:
+## Known stack suffix:
+## BREAK SEMICOLON
+## LR(1) items:
+last_stat -> BREAK SEMICOLON . [ UNTIL EOF END ELSEIF ELSE ]
+## Transitions:
+## Reductions:
+-- On UNTIL EOF END ELSEIF ELSE
+--   reduce production last_stat -> BREAK SEMICOLON
+
+State 176:
+## Known stack suffix:
+## rlist(__anonymous_0) stmt
+## LR(1) items:
+rlist(__anonymous_0) -> rlist(__anonymous_0) stmt . [ WHILE UNTIL RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+rlist(__anonymous_0) -> rlist(__anonymous_0) stmt . SEMICOLON [ WHILE UNTIL RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On SEMICOLON shift to state 177
+## Reductions:
+-- On WHILE UNTIL RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK
+--   reduce production rlist(__anonymous_0) -> rlist(__anonymous_0) stmt
+
+State 177:
+## Known stack suffix:
+## rlist(__anonymous_0) stmt SEMICOLON
+## LR(1) items:
+rlist(__anonymous_0) -> rlist(__anonymous_0) stmt SEMICOLON . [ WHILE UNTIL RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+## Reductions:
+-- On WHILE UNTIL RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK
+--   reduce production rlist(__anonymous_0) -> rlist(__anonymous_0) stmt SEMICOLON
+
+State 178:
+## Known stack suffix:
+## simple_expr
+## LR(1) items:
+call -> simple_expr . call_args [ WHILE UNTIL STRING SEMICOLON RETURN REPEAT OSQUARE OPAREN OBRACE LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DOT DO COLON BREAK ]
+call -> simple_expr . COLON IDENT call_args [ WHILE UNTIL STRING SEMICOLON RETURN REPEAT OSQUARE OPAREN OBRACE LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DOT DO COLON BREAK ]
+name -> simple_expr . DOT IDENT [ STRING OSQUARE OPAREN OBRACE EQUALS DOT COMMA COLON ]
+name -> simple_expr . OSQUARE expr CSQUARE [ STRING OSQUARE OPAREN OBRACE EQUALS DOT COMMA COLON ]
+## Transitions:
+-- On STRING shift to state 34
+-- On OSQUARE shift to state 35
+-- On OPAREN shift to state 72
+-- On OBRACE shift to state 9
+-- On DOT shift to state 79
+-- On COLON shift to state 81
+-- On table shift to state 83
+-- On call_args shift to state 85
+## Reductions:
+
+State 179:
+## Known stack suffix:
+## sep_list1(COMMA,name)
+## LR(1) items:
+sep_list1(COMMA,name) -> sep_list1(COMMA,name) . COMMA name [ EQUALS COMMA ]
+stmt -> sep_list1(COMMA,name) . EQUALS sep_list1(COMMA,expr) [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On EQUALS shift to state 180
+-- On COMMA shift to state 182
+## Reductions:
+
+State 180:
+## Known stack suffix:
+## sep_list1(COMMA,name) EQUALS
+## LR(1) items:
+stmt -> sep_list1(COMMA,name) EQUALS . sep_list1(COMMA,expr) [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On simple_expr shift to state 33
+-- On sep_list1(COMMA,expr) shift to state 181
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 78
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+
+State 181:
+## Known stack suffix:
+## sep_list1(COMMA,name) EQUALS sep_list1(COMMA,expr)
+## LR(1) items:
+sep_list1(COMMA,expr) -> sep_list1(COMMA,expr) . COMMA expr [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO COMMA BREAK ]
+stmt -> sep_list1(COMMA,name) EQUALS sep_list1(COMMA,expr) . [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+-- On COMMA shift to state 74
+## Reductions:
+-- On WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK
+--   reduce production stmt -> sep_list1(COMMA,name) EQUALS sep_list1(COMMA,expr)
+
+State 182:
+## Known stack suffix:
+## sep_list1(COMMA,name) COMMA
+## LR(1) items:
+sep_list1(COMMA,name) -> sep_list1(COMMA,name) COMMA . name [ EQUALS COMMA ]
+## Transitions:
+-- On OPAREN shift to state 8
+-- On IDENT shift to state 15
+-- On var shift to state 31
+-- On simple_expr shift to state 178
+-- On name shift to state 183
+-- On call shift to state 40
+## Reductions:
+
+State 183:
+## Known stack suffix:
+## sep_list1(COMMA,name) COMMA name
+## LR(1) items:
+sep_list1(COMMA,name) -> sep_list1(COMMA,name) COMMA name . [ EQUALS COMMA ]
+simple_expr -> name . [ STRING OSQUARE OPAREN OBRACE DOT COLON ]
+## Transitions:
+## Reductions:
+-- On EQUALS COMMA
+--   reduce production sep_list1(COMMA,name) -> sep_list1(COMMA,name) COMMA name
+-- On STRING OSQUARE OPAREN OBRACE DOT COLON
+--   reduce production simple_expr -> name
+
+State 184:
+## Known stack suffix:
+## name
+## LR(1) items:
+sep_list1(COMMA,name) -> name . [ EQUALS COMMA ]
+simple_expr -> name . [ STRING OSQUARE OPAREN OBRACE DOT COLON ]
+## Transitions:
+## Reductions:
+-- On EQUALS COMMA
+--   reduce production sep_list1(COMMA,name) -> name
+-- On STRING OSQUARE OPAREN OBRACE DOT COLON
+--   reduce production simple_expr -> name
+
+State 185:
+## Known stack suffix:
+## rlist(__anonymous_0) last_stat
+## LR(1) items:
+stmts -> rlist(__anonymous_0) last_stat . [ UNTIL EOF END ELSEIF ELSE ]
+## Transitions:
+## Reductions:
+-- On UNTIL EOF END ELSEIF ELSE
+--   reduce production stmts -> rlist(__anonymous_0) last_stat
+
+State 186:
+## Known stack suffix:
+## call
+## LR(1) items:
+simple_expr -> call . [ STRING OSQUARE OPAREN OBRACE DOT COLON ]
+stmt -> call . [ WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK ]
+## Transitions:
+## Reductions:
+-- On STRING OSQUARE OPAREN OBRACE DOT COLON
+--   reduce production simple_expr -> call
+-- On WHILE UNTIL SEMICOLON RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF END ELSEIF ELSE DO BREAK
+--   reduce production stmt -> call
+** Conflict on OPAREN
+
+State 187:
+## Known stack suffix:
+## program
+## LR(1) items:
+program' -> program . [ # ]
+## Transitions:
+## Reductions:
+-- On #
+--   accept program
+
+State 188:
+## Known stack suffix:
+##
+## LR(1) items:
+repl_exprs' -> . repl_exprs [ # ]
+## Transitions:
+-- On TRUE shift to state 5
+-- On SUB shift to state 6
+-- On STRING shift to state 7
+-- On OPAREN shift to state 8
+-- On OBRACE shift to state 9
+-- On NUMBER shift to state 11
+-- On NOT shift to state 12
+-- On NIL shift to state 13
+-- On LEN shift to state 14
+-- On IDENT shift to state 15
+-- On FUNCTION shift to state 16
+-- On FALSE shift to state 29
+-- On DOTS shift to state 30
+-- On var shift to state 31
+-- On table shift to state 32
+-- On stmts shift to state 189
+-- On simple_expr shift to state 33
+-- On sep_list1(COMMA,expr) shift to state 191
+-- On rlist(__anonymous_0) shift to state 3
+-- On repl_exprs shift to state 193
+-- On name shift to state 36
+-- On expr_pow shift to state 37
+-- On expr shift to state 78
+-- On call shift to state 40
+-- On atom shift to state 41
+## Reductions:
+-- On WHILE RETURN REPEAT OPAREN LOCAL IF IDENT FUNCTION FOR EOF DO BREAK
+--   reduce production rlist(__anonymous_0) ->
+** Conflict on OPAREN IDENT FUNCTION
+
+State 189:
+## Known stack suffix:
+## stmts
+## LR(1) items:
+repl_exprs -> stmts . EOF [ # ]
+## Transitions:
+-- On EOF shift to state 190
+## Reductions:
+
+State 190:
+## Known stack suffix:
+## stmts EOF
+## LR(1) items:
+repl_exprs -> stmts EOF . [ # ]
+## Transitions:
+## Reductions:
+-- On #
+--   reduce production repl_exprs -> stmts EOF
+
+State 191:
+## Known stack suffix:
+## sep_list1(COMMA,expr)
+## LR(1) items:
+repl_exprs -> sep_list1(COMMA,expr) . EOF [ # ]
+sep_list1(COMMA,expr) -> sep_list1(COMMA,expr) . COMMA expr [ EOF COMMA ]
+## Transitions:
+-- On EOF shift to state 192
+-- On COMMA shift to state 74
+## Reductions:
+
+State 192:
+## Known stack suffix:
+## sep_list1(COMMA,expr) EOF
+## LR(1) items:
+repl_exprs -> sep_list1(COMMA,expr) EOF . [ # ]
+## Transitions:
+## Reductions:
+-- On #
+--   reduce production repl_exprs -> sep_list1(COMMA,expr) EOF
+
+State 193:
+## Known stack suffix:
+## repl_exprs
+## LR(1) items:
+repl_exprs' -> repl_exprs . [ # ]
+## Transitions:
+## Reductions:
+-- On #
+--   accept repl_exprs
+

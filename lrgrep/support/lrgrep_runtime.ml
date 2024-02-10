@@ -110,7 +110,7 @@ end
 module Interpreter (PE : Parse_errors) (P : Parser) =
 struct
 
-  let debug = false
+  let debug = true
 
   let eprintf = Printf.eprintf
 

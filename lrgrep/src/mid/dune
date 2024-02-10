@@ -1,3 +1,4 @@
 (library
  (name mid)
+ (public_name lrgrep.mid)
  (libraries front utils fix menhirSdk valmari lrijkstra_utils support))

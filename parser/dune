@@ -1,0 +1,62 @@
+(library
+ (name parser)
+ (modules parser)
+ (libraries menhirLib))
+
+(library
+ (name lexer)
+ (modules lexer)
+ (libraries parser))
+
+(ocamllex lexer)
+
+(menhir
+ (modules parser)
+ (flags :standard --inspection --table --cmly --dump))
+
+(rule
+ (target parse_errors.lua)
+ (action
+  (run
+   %{exe:../lrgrep/src/main.exe}
+   %{dep:parse_errors.mlyl}
+   -g
+   %{dep:parser.cmly}
+   -o
+   %{target})))
+
+(rule
+ (action
+  (with-stdout-to
+   parser.lua
+   (run
+    ../lua_menhir/lua_menhir.exe
+    %{dep:parser.cmly}
+    %{dep:parse_errors.lua}
+    --header
+    %{dep:header.lua}))))
+
+(rule
+ (action
+  (with-stdout-to
+   messages.txt
+   (run menhir --list-errors %{dep:parser.mly}))))
+
+(executable
+ (name repl)
+ (modules
+  ; parse_errors ; Generated with "normal" lrgrep, but intentionally not checked in.
+  repl)
+ (libraries lrgrep.runtime parser lexer menhirLib))
+
+(executable
+ (name interpreter)
+ (modules interpreter)
+ (libraries
+  menhirSdk
+  menhirLib
+  lexer
+  parser
+  lrgrep.mid
+  lrgrep.fix
+  lrgrep.utils))
